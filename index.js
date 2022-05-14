@@ -1,11 +1,33 @@
 const express = require('express')
-
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 
+let persons = [
+    {
+        name: 'pentti',
+        number: 12345,
+        id: 1
+    },
+    {
+        name: 'pirjo',
+        number: 00000,
+        id: 2
+    },
+    {
+        name: 'marjatta',
+        number: 555555,
+        id: 3
+    },
+    {
+        name: 'lauri',
+        number: 098765,
+        id: 4
+    }
+]
 
 app.use(express.json())
+app.use(express.static('build'))
 app.use(morgan('tiny'))
 app.use(cors())
 
@@ -32,32 +54,9 @@ const createPerson = (name, number) => {
     return person
 }
 
-let persons = [
-    {
-        name: 'pentti',
-        number: 12345,
-        id: 1
-    },
-    {
-        name: 'pirjo',
-        number: 00000,
-        id: 2
-    },
-    {
-        name: 'marjatta',
-        number: 555555,
-        id: 3
-    },
-    {
-        name: 'lauri',
-        number: 098765,
-        id: 4
-    }
-]
-
 app.get('/', (req, res) => {
-  res.send('<h1>Morjesta!</h1>')
-})
+    res.send('<h1>Morjesta!</h1>')
+  })
 
 app.get('/api/persons', (req, res) => {
   res.json(persons)
